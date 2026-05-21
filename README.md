@@ -1,6 +1,6 @@
 # Job Tracker
 
-A personal job application tracker built to monitor my own job search and learn full-stack development.
+A personal job application tracker built to monitor my own job search.
 
 ## Goal
 
