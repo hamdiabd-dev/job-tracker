@@ -1,4 +1,8 @@
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
+from sqlalchemy import text
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.database import get_db
 
 app = FastAPI(
     title="Job Tracker API",
@@ -19,3 +23,11 @@ def root():
 @app.get("/health")
 def health():
     return {"status": "ok"}
+
+
+@app.get("/health/db")
+async def health_db(db: AsyncSession = Depends(get_db)):
+    """Verify the database connection by running SELECT 1."""
+    result = await db.execute(text("SELECT 1"))
+    value = result.scalar()
+    return {"status": "ok", "database": "connected", "test_query": value}
