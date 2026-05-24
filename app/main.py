@@ -3,7 +3,7 @@ from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database import get_db
-from app.routers import auth
+from app.routers import applications, auth
 
 app = FastAPI(
     title="Job Tracker API",
@@ -12,6 +12,7 @@ app = FastAPI(
 )
 
 app.include_router(auth.router)
+app.include_router(applications.router)
 
 
 @app.get("/")
